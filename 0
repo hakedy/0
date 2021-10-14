@@ -1,0 +1,50 @@
+/* Allahware 3.1 cmdBlock version */
+/* You must be whitelisted to use this, this may take a while for your worldId to be whitelisted */
+
+return import lua
+return import luau
+return import system
+return import IndexSystem
+index(*var, *index)
+--[[
+
+Current Commands:
+/graphic (1-10) - Sets user graphics (all in index) to variable.
+/replaceblock (blockid) (with blockid) - Sets all loaded blocks in chunks within player that match blockid1 to blockid2
+/anticrash (true-false) - Prevents horions crash (limits chunk data)
+/antihack (true-false) - Bloats the horion injector (not recommended, freezes every 0.2 seconds, only use in extreme cases)
+/antilag (true-false) - Blocks common lag methods used
+/antigive (true-false) - Checks items univeral id and matches it with horions id.
+/blockentity (entityid/entityname) (true-false) - Blocks entity from ever spawning
+/unlockfps (local-server) - 
+
+
+]]--
+
+
+headers = {}
+["Minecraft"] = system:WaitForFirst("minecraftx64cur.exe")
+["worldspace"] = Minecraft.temp:WaitFor("loadedWorld").nbt
+["ChatService"] = worldspace.clientToServer.chatServer
+["entities"] = worldspace.entities
+["blocks"] = worldspace.chunks
+["settings"] = Minecraft.localSettings
+["graphics"] = settings.graphics
+["PlayerService"] = worldspace.plrs
+["bin"] = newObj("Folder").Parent = worldspace
+
+players = {}
+function plr-buildlist()
+for i, v in (PlayerService:GetDescendants()) do
+list i = [v.Name .. v.PlayerModel]
+plr-buildlist:connect(i)
+end
+end
+
+cmds = {}
+function cs()
+in players() do
+msg = ChatService.Chatted:Get(content)
+
+return headers
+return players
