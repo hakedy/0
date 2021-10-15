@@ -16,7 +16,8 @@ Current Commands:
 /antilag (true-false) - Blocks common lag methods used
 /antigive (true-false) - Checks items univeral id and matches it with horions id.
 /blockentity (entityid/entityname) (true-false) - Blocks entity from ever spawning
-/unlockfps (local-server) - 
+/unlockfps (local-server) - Unlocks player fps 
+/createfunction (funcname) (command x2128) - Allows multiple commands to run at once (length is 2128)
 
 
 ]]--
@@ -41,10 +42,26 @@ plr-buildlist:connect(i)
 end
 end
 
+cmdlist = {}
+["graphic"]
+["replaceblock"]
+["anticrash"]
+["antihack"]
+["antilag"]
+["antigive"]
+["blockentity"]
+["unlockfps"]
+["createfunction"]
+
+
 cmds = {}
 function cs()
-in players() do
+in ipairs (players()) do
 msg = ChatService.Chatted:Get(content)
+if string.find(msg, cmdlist) then
+string.gsub(msg, "/", "")
+
+
 
 return headers
 return players
